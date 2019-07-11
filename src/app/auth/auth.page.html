@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ isLogin ? 'Login' : 'Register'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="8" size-md="6" offset-sm="2" offset-md="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" ngModel name="email" required email #emailCtrl="ngModel">
+              </ion-input>
+            </ion-item>
+            <ion-item *ngIf="emailCtrl.invalid && emailCtrl.touched" lines="none"
+              style="font-size: 12px; margin: 2px !important; min-height: 2px !important;">
+              <ion-label color="danger">Email is
+                required.
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" ngModel name="password" required minlength="6" #pass="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="pass.invalid && pass.touched" lines="none"
+              style="font-size: 12px; margin: 2px !important; min-height: 2px !important;">
+              <ion-label color="danger">Password is
+                required.
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-row size-sm="8" size-md="6" offset-sm="2" offset-md="3">
+            <ion-col>
+              <ion-button color="medium" type="button" fill="clear" expand="block" (click)="changeMode()">
+                Switch to {{ isLogin ? 'Register' : 'Login' }}</ion-button>
+              <ion-button [disabled]="!f.valid" type="submit" fill="outline" color="primary" expand="block">
+                {{ isLogin ? 'Login' : 'Register' }}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
